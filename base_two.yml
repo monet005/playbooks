@@ -6,12 +6,11 @@
   become: yes
 
   tasks:
-    - name: Change role_path permissions
+    - name: change permission
       file:
         path: /var/tmp/ansible
         owner: raemone
-	mode: '0755'
-        state: directory
+        mode: '0755'
 
     - name: download the requirements
       shell: |
