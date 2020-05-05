@@ -1,6 +1,6 @@
 ---
 - include_role:
-    name: appuser
+    name: approle
 
 - include_role:
     name: root

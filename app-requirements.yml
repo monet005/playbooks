@@ -1,8 +1,8 @@
 ---
-- src: git+https://github.com/monet005/playbooks.git
+- src: git+https://github.com/monet005/approle.git
   scm: git
   version: master
-  name: appuser
+  name: approle
 
 - src: git+https://github.com/monet005/playbooks.git
   scm: git
