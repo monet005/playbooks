@@ -3,6 +3,7 @@
   hosts: localhost
   connection: local
   become_user: raemone
+  become: yes
 
   tasks:
     - name: download the requirements
