@@ -1,0 +1,7 @@
+---
+# tasks file for appuser
+
+- name: Create user directories
+  file:
+    path: /var/tmp/appuser 
+    mode: '0755'

@@ -1,0 +1,6 @@
+---
+# tasks file for root
+- name: create directory by root
+  file:
+    path: /var/tmp/root
+    mode: '0755'
