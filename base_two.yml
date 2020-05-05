@@ -6,6 +6,12 @@
   become: yes
 
   tasks:
+    - name: Change role_path permissions
+      file:
+        path: /var/tmp/ansible
+        owner: "{{ ansible_become_user }}"
+	mode: '0755'
+
     - name: download the requirements
       shell: |
         ansible-galaxy install --roles-path /var/tmp/ansible/roles -r "{{ playbook }}-requirements.yml"
