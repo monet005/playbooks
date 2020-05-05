@@ -11,6 +11,7 @@
         path: /var/tmp/ansible
         owner: raemone
 	mode: '0755'
+        state: directory
 
     - name: download the requirements
       shell: |
