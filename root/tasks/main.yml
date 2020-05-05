@@ -4,3 +4,4 @@
   file:
     path: /var/tmp/root
     mode: '0755'
+    state: directory
