@@ -1,0 +1,13 @@
+---
+- name: provisioning play
+  hosts: localhost
+  connection: local
+  become_user: raemone
+
+  tasks:
+    - name: download the requirements
+      shell: |
+        ansible-galaxy install --roles-path /root/ansible/roles -r "{{ playbook }}-requirements.yml"
+
+    - name: "start {{ playbook }}"
+      include_tasks: "{{ playbook }}.yml"
