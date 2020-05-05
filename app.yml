@@ -1,6 +1,8 @@
 ---
 - include_role:
     name: approle
+  vars:
+    ansible_become_user: raemone
 
 - include_role:
     name: root
