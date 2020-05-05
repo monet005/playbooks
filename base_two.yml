@@ -8,7 +8,7 @@
   tasks:
     - name: download the requirements
       shell: |
-        ansible-galaxy install --roles-path /root/ansible/roles -r "{{ playbook }}-requirements.yml"
+        ansible-galaxy install --roles-path /var/tmp/roles -r "{{ playbook }}-requirements.yml"
 
     - name: "start {{ playbook }}"
       include_tasks: "{{ playbook }}.yml"
