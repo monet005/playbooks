@@ -9,7 +9,7 @@
     - name: Change role_path permissions
       file:
         path: /var/tmp/ansible
-        owner: "{{ ansible_become_user }}"
+        owner: raemone
 	mode: '0755'
 
     - name: download the requirements
