@@ -32,7 +32,8 @@
 
     - name: download the app requirements
       shell: |
-        ansible-galaxy install --roles-path /var/tmp/ansible/roles -r app-requirements.yml
+        ansible-galaxy install --roles-path /var/tmp/ansible/roles -r {{ playbook_dir }}/app-requirements.yml
+      become_user: root
 
 #    - name: "start {{ playbook }}"
 #      include_tasks: "{{ playbook }}.yml"
