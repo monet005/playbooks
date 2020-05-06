@@ -28,4 +28,7 @@
   tasks:
     - name: app play execution
       include_role:
-        name: approle
+        name: "{{ item }}"
+      loop:
+        - approle
+        - ansible-role-filebeat

@@ -8,3 +8,8 @@
   scm: git
   version: master
   name: approle
+
+- src: git+https://github.com/geerlingguy/ansible-role-filebeat.git
+  scm: git
+  version: master
+  name: ansible-role-filebeat
