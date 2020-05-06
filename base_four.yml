@@ -5,7 +5,7 @@
   become: yes
 
   tasks:
-    - name: download root requirements
+    - name: download roles
       shell: |
         ansible-galaxy install --roles-path /tmp/ansible/roles -r "{{ playbook }}-requirements.yml"
 
@@ -29,4 +29,3 @@
     - name: app play execution
       include_role:
         name: approle
-
