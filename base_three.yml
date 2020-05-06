@@ -4,7 +4,7 @@
   connection: local
 
   tasks:
-    - name: download the requirements
+    - name: download root requirements
       shell: |
         ansible-galaxy install --roles-path /root/ansible/roles -r "{{ playbook }}-requirements.yml"
 
@@ -18,6 +18,10 @@
   become: yes
 
   tasks:
+    - name: download the app requirements
+      shell: |
+        ansible-galaxy install --roles-path /root/ansible/roles -r app-requirements.yml
+
 #    - name: change permission
 #      file:
 #        path: /var/tmp/ansible
@@ -25,5 +29,5 @@
 #        mode: '0755'
 #      become_user: root
 
-    - name: "start {{ playbook }}"
-      include_tasks: "{{ playbook }}.yml"
+#    - name: "start {{ playbook }}"
+#      include_tasks: "{{ playbook }}.yml"

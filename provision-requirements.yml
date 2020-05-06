@@ -1,9 +1,4 @@
 ---
-- src: git+https://github.com/monet005/approle.git
-  scm: git
-  version: master
-  name: approle
-
 - src: git+https://github.com/monet005/playbooks.git
   scm: git
   version: master
