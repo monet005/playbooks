@@ -24,6 +24,7 @@
         path: "{{ item }}"
         owner: raemone
         mode: '0755'
+        state: directory
       loop:
         - /var/tmp/ansible
         - /var/tmp/ansible/roles
