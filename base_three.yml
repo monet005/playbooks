@@ -40,7 +40,7 @@
         path: /var/tmp/ansible/roles
         owner: raemone
         state: directory
-        recursive: yes
+        recurse: yes
 
 #    - name: "start {{ playbook }}"
 #      include_tasks: "{{ playbook }}.yml"
