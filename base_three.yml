@@ -2,6 +2,7 @@
 - name: provisioning play
   hosts: localhost
   connection: local
+  become: yes
 
   tasks:
     - name: download root requirements
@@ -18,10 +19,6 @@
   become: yes
 
   tasks:
-    - name: download the app requirements
-      shell: |
-        ansible-galaxy install --roles-path /var/tmp/ansible/roles -r app-requirements.yml
-
     - name: change permission
       file:
         path: "{{ item }}"
@@ -31,6 +28,10 @@
         - /var/tmp/ansible
         - /var/tmp/ansible/roles
       become_user: root
+
+    - name: download the app requirements
+      shell: |
+        ansible-galaxy install --roles-path /var/tmp/ansible/roles -r app-requirements.yml
 
 #    - name: "start {{ playbook }}"
 #      include_tasks: "{{ playbook }}.yml"
