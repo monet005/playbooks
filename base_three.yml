@@ -19,7 +19,7 @@
   become: yes
 
   tasks:
-    - name: change permission
+    - name: create roledirs
       file:
         path: "{{ item }}"
         owner: raemone
@@ -34,6 +34,13 @@
       shell: |
         ansible-galaxy install --roles-path /var/tmp/ansible/roles -r {{ playbook_dir }}/app-requirements.yml
       become_user: root
+
+    - name: set permissions
+      file:
+        path: /var/tmp/ansible/roles
+        owner: raemone
+        state: directory
+        recursive: yes
 
 #    - name: "start {{ playbook }}"
 #      include_tasks: "{{ playbook }}.yml"
