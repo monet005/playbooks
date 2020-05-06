@@ -43,5 +43,7 @@
         recurse: yes
       become_user: root
 
-#    - name: "start {{ playbook }}"
-#      include_tasks: "{{ playbook }}.yml"
+    - name: app play execution
+      include_role:
+        name: approle
+
