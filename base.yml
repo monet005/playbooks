@@ -10,7 +10,3 @@
 
     - name: "start {{ playbook }}"
       include_tasks: "{{ playbook }}.yml"
-
-    - name: run ram roles here
-      include_tasks: ram.yml
-      become_user: raemone
