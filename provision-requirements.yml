@@ -6,7 +6,7 @@
 
 - src: git+https://github.com/monet005/approle.git
   scm: git
-  version: {{ branch | default('master') }}
+  version: master
   name: approle
 
 - src: git+https://github.com/geerlingguy/ansible-role-filebeat.git
