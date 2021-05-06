@@ -1,0 +1,23 @@
+- hosts: localhost
+  connection: local
+
+  vars:
+    exclude_dir:
+      - /var/test/hello
+      - /var/test/world
+      - /var/test/siargao
+
+  tasks:
+    - name: Check if target dir exists in updatedb.conf
+      command: grep "{{ item }}" updatedb.conf
+      loop: "{{ exclude_dir }}"
+      register: d
+      failed_when: false
+
+    - name: update updatedb.conf
+      replace:
+        path: updatedb.conf
+        regexp: '^(PRUNEPATHS.*\w)' 
+        replace: '\1 {{ item.item }}'
+      loop: "{{ d.results }}"
+      when: item.rc == 1
