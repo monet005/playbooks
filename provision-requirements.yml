@@ -4,7 +4,3 @@
   version: master
   name: root
 
-- src: git+https://github.com/monet005/approle.git
-  scm: git
-  version: dev
-  name: approle
