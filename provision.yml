@@ -1,3 +1,6 @@
 ---
-- include_role:
-    name: root
+- hosts: all
+
+  tasks:
+    - include_role:
+        name: root

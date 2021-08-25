@@ -1,7 +1,3 @@
 ---
 # tasks file for root
-- name: create directory by root
-  file:
-    path: /var/tmp/root
-    mode: '0755'
-    state: directory
+- debug: msg="running from root role"
