@@ -2,3 +2,4 @@
 
   tasks:
     - debug: msg="hello world"
+    - debug: msg="good morning"
