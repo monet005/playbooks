@@ -1,0 +1,18 @@
+- hosts: all
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: gather package facts
+      package_facts:
+        manager: auto
+
+    - name: gather facts
+      setup:
+
+    - name: save output locally
+      copy:
+        content: "{{ ansible_facts | to_nice_json }}"
+        dest: "{{ inventory_hostname }}_facts.json"
+      delegate_to: localhost
+    
