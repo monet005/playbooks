@@ -3,3 +3,6 @@
   tasks:
     - debug: msg="hello world"
     - debug: msg="good morning"
+    - debug: msg="{{ one }}"
+    - debug: msg="{{ two }}"
+    - debug: msg="{{ three }}"
