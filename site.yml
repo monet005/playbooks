@@ -1,4 +1,4 @@
 - hosts: all
 
   tasks:
-    - debug: msg="showing group vars environment: {{ environment }}"
+    - debug: msg="showing group vars environment {{ environment }}"
