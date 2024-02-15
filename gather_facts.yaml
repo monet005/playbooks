@@ -1,0 +1,34 @@
+- hosts: all
+  become: true
+
+  tasks:
+    - name: gather sysctl output
+      ansible.builtin.command: sysctl -a
+      register: sysctl_all
+
+    - name: add sysctl output to facts
+      ansible.builtin.set_fact:
+        sysctl_all: "{{ sysctl_all.stdout_lines }}"
+        cacheable: true 
+
+    - name: gather ls mountpoints
+      ansible.builtin.command: ls -ld "{{ item.key }}"
+      register: ls_ld_all
+      loop: "{{ ansible_facts.facter_mountpoints | dict2items }}"
+
+    - debug: msg="{{ item }}"
+      loop: "{{ ls_ld_all.results | dict2items }}"
+
+          #    - name: gather facts
+          #      ansible.builtin.setup:
+          #      register: facts
+
+          #    - name: print facts
+          #      ansible.builtin.debug:
+          #        msg: "{{ facts }}"
+
+    - name: copy facts
+      ansible.builtin.copy:
+        content: "{{ ansible_facts | to_nice_json }}"
+        dest: /tmp/facts.json
+
