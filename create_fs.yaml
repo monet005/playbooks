@@ -1,0 +1,65 @@
+- name: A server_a deployment playbook
+  hosts: server_a
+  become_user: root
+  become: true
+  gather_facts: true
+  vars:
+    disk_name: vdb
+    vg_name: vg_opt_soc
+    lv_name: lv_opt_soc
+    mount_point: /opt/soc
+    fs_type: xfs
+    dir_owner: vagrant
+    dir_group: vagrant
+    dir_perms: '0755'
+
+  tasks:
+    - name: Check the allocated disk for {{ mount_point }}
+      ansible.builtin.command:
+        cmd: lsblk --noheadings --nodeps "/dev/{{ disk_name }}" -o name
+      register: disk_check
+      ignore_errors: true
+
+    - name: Running pre-requisite checks
+      ansible.builtin.assert:
+        that: 
+          - disk_check.rc == 0
+        success_msg: "{{ disk_name }} disk is present"
+        fail_msg: "{{ disk_name }} disk does not exists"
+
+    - name: Create {{ mount_point }} volume group
+      community.general.lvg:
+        vg: "{{ vg_name }}"
+        pvs: "/dev/{{ disk_name }}"
+        state: present
+
+    - name: Create {{ mount_point }} logical volume
+      community.general.lvol:
+        vg: "{{ vg_name }}"
+        lv: "{{ lv_name }}"
+        size: 100%FREE
+        state: present
+        shrink: false
+
+    - name: Create {{ mount_point }} {{ fs_type }} filesystem
+      community.general.filesystem:
+        fstype: "{{ fs_type }}"
+        dev: "/dev/{{ vg_name }}/{{ lv_name }}"
+
+    - name: Mount the {{ mount_point }} filesystem  
+      ansible.posix.mount:
+        path: "{{ mount_point }}"
+        src: "/dev/{{ vg_name }}/{{ lv_name }}"
+        fstype: "{{ fs_type }}"
+        opts: defaults
+        dump: 1
+        passno: 2
+        state: mounted
+
+    - name: Set the {{ mount_point }} ownership and permission  
+      ansible.builtin.file:
+        path: "{{ mount_point }}"
+        owner: "{{ dir_owner }}"
+        group: "{{ dir_group }}"
+        mode: "{{ dir_perms }}"
+
